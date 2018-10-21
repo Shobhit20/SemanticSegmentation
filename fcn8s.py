@@ -41,9 +41,9 @@ def skip_connections(skip_conn1, skip_conn2, skip_conn3, nClasses):
     return decoder
 
 
-def VGG16_backbone(nClasses=20):
+def VGG16_backbone(nClasses=21):
 
-    img_input = Input(shape=(224, 224, 3))
+    img_input = Input(shape=( 224, 224, 3))
 
 
     # Block 1

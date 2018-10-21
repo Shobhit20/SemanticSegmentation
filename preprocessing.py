@@ -20,13 +20,13 @@ def load_images(img_path):
 
     img = img.resize((VGG_IMG_WIDTH, VGG_IMG_HEIGHT), Image.ANTIALIAS)
     img = np.array(img).astype(float)
-    print(img.shape)
     img = preprocess_input(img)
+
     return img
 
 
 def load_segmented_images(segmented_img_path):
-    print(segmented_img_path)
+
     seg_voc_layers = np.zeros((VGG_IMG_WIDTH, VGG_IMG_HEIGHT, VOC_CLASSES))
     segmented_img = Image.open(segmented_img_path)
     segmented_img = segmented_img.resize((VGG_IMG_WIDTH, VGG_IMG_HEIGHT), Image.ANTIALIAS)
@@ -51,7 +51,7 @@ def label_generator(training_img_path, val_img_path):
     return train_img_labels[:-1], val_img_labels[:-1]
 
 
-def data_generator(image_path, segmentation_path, img_labels, batch_size=64):
+def data_generator(image_path, segmentation_path, img_labels, batch_size=5):
     image_set, image_segmentation_set = [], []
 
     for i in range(len(img_labels)):
@@ -67,4 +67,4 @@ def data_generator(image_path, segmentation_path, img_labels, batch_size=64):
             X.append(load_images(img))
             labels.append(load_segmented_images(segmentation))
 
-        yield X, labels
+        yield np.array(X), np.array(labels)
